@@ -202,32 +202,8 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1080p Full HD</td>
-                <td>MP4</td>
-                <td>~45 MB</td>
-                <td><a href="#" class="dl-link">Download</a></td>
-            </tr>
-            <tr>
-                <td>720p HD</td>
-                <td>MP4</td>
-                <td>~28 MB</td>
-                <td><a href="#" class="dl-link">Download</a></td>
-            </tr>
-            <tr>
-                <td>480p SD</td>
-                <td>MP4</td>
-                <td>~12 MB</td>
-                <td><a href="#" class="dl-link">Download</a></td>
-            </tr>
-            <tr>
-                <td>High Quality</td>
-                <td>MP3</td>
-                <td>~4.5 MB</td>
-                <td><a href="#" class="dl-link" style="background: #f59e0b;">Extract</a></td>
-            </tr>
-        </tbody>
+        <tbody id="resultBody">
+            </tbody>
     </table>
 </div>
 
@@ -251,11 +227,44 @@
         document.getElementById('loader').style.display = 'block';
         document.getElementById('qualityTable').style.display = 'none';
 
-        // Professional Fetching Animation (Simulated)
+        // ফিক্সড ডাউনলোড লজিক: এখানে একটি থার্ড পার্টি API ব্যবহার করা হয়েছে যা ভিডিও ইউআরএল কনভার্ট করবে
+        // নোট: রিয়েল লাইফ প্রোডাকশনে নিজস্ব API ব্যবহার করা ভালো।
         setTimeout(() => {
             document.getElementById('loader').style.display = 'none';
+            const tableBody = document.getElementById('resultBody');
+            
+            // নিচের কোডটি আপনার দেওয়া লিঙ্ক অনুযায়ী ডাউনলোড বাটনকে সচল করবে
+            const downloadServiceUrl = "https://9xbuddy.com/process?url=" + encodeURIComponent(link);
+            
+            tableBody.innerHTML = `
+                <tr>
+                    <td>1080p Full HD</td>
+                    <td>MP4</td>
+                    <td>Auto</td>
+                    <td><a href="${downloadServiceUrl}" target="_blank" class="dl-link">Download</a></td>
+                </tr>
+                <tr>
+                    <td>720p HD</td>
+                    <td>MP4</td>
+                    <td>Auto</td>
+                    <td><a href="${downloadServiceUrl}" target="_blank" class="dl-link">Download</a></td>
+                </tr>
+                <tr>
+                    <td>480p SD</td>
+                    <td>MP4</td>
+                    <td>Auto</td>
+                    <td><a href="${downloadServiceUrl}" target="_blank" class="dl-link">Download</a></td>
+                </tr>
+                <tr>
+                    <td>High Quality</td>
+                    <td>MP3</td>
+                    <td>Auto</td>
+                    <td><a href="${downloadServiceUrl}" target="_blank" class="dl-link" style="background: #f59e0b;">Extract</a></td>
+                </tr>
+            `;
+            
             document.getElementById('qualityTable').style.display = 'table';
-        }, 2500);
+        }, 2000);
     }
 </script>
 

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M R VIDEO DOWNLOADER | Professional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #00f2fe;
+            --main-btn: #4facfe;
+            --bg-dark: #050a14;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .logo-text {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe, #7000ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* Platform Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            width: 90%;
+            max-width: 900px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .card i { font-size: 2.5rem; margin-bottom: 10px; }
+        .fa-facebook { color: #1877F2; }
+        .fa-tiktok { color: #00f2ea; }
+        .fa-youtube { color: #FF0000; }
+        .fa-instagram { color: #E4405F; }
+
+        /* Download Section */
+        .main-box {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-top: 20px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 1.1rem;
+            outline: none;
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+        .btn-action {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, var(--main-btn), #00f2fe);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* Quality Chart/Table */
+        .quality-chart {
+            display: none;
+            margin-top: 30px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .quality-chart th, .quality-chart td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+        }
+
+        .quality-chart th { color: var(--accent); font-size: 1.2rem; }
+
+        .dl-link {
+            background: #22c55e;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .dl-link:hover { background: #16a34a; box-shadow: 0 0 10px #22c55e; }
+
+        .loading-ring {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.1);
+            border-top: 5px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        footer { margin-top: 50px; padding-bottom: 30px; color: #475569; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-text">M R VIDEO DOWNLOADER</div>
+    <p style="letter-spacing: 2px; color: #94a3b8;">High Speed • Pro Quality • All Platforms</p>
+</header>
+
+<div class="grid-container">
+    <div class="card" onclick="openDownloader('Facebook')"><i class="fab fa-facebook"></i><br>FACEBOOK</div>
+    <div class="card" onclick="openDownloader('TikTok')"><i class="fab fa-tiktok"></i><br>TIKTOK</div>
+    <div class="card" onclick="openDownloader('YouTube')"><i class="fab fa-youtube"></i><br>YOUTUBE</div>
+    <div class="card" onclick="openDownloader('Instagram')"><i class="fab fa-instagram"></i><br>INSTAGRAM</div>
+</div>
+
+<div class="main-box" id="mainBox">
+    <h2 id="targetTitle" style="color: var(--accent); margin-bottom: 25px; text-align: center;"></h2>
+    <input type="text" id="urlInput" placeholder="Paste link here...">
+    <button class="btn-action" onclick="fetchVideo()">Analyze & Download</button>
+
+    <div class="loading-ring" id="loader"></div>
+
+    <table class="quality-chart" id="qualityTable">
+        <thead>
+            <tr>
+                <th>Quality</th>
+                <th>Format</th>
+                <th>Size</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1080p Full HD</td>
+                <td>MP4</td>
+                <td>~45 MB</td>
+                <td><a href="#" class="dl-link">Download</a></td>
+            </tr>
+            <tr>
+                <td>720p HD</td>
+                <td>MP4</td>
+                <td>~28 MB</td>
+                <td><a href="#" class="dl-link">Download</a></td>
+            </tr>
+            <tr>
+                <td>480p SD</td>
+                <td>MP4</td>
+                <td>~12 MB</td>
+                <td><a href="#" class="dl-link">Download</a></td>
+            </tr>
+            <tr>
+                <td>High Quality</td>
+                <td>MP3</td>
+                <td>~4.5 MB</td>
+                <td><a href="#" class="dl-link" style="background: #f59e0b;">Extract</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer>
+    Developed by <span style="color: var(--accent);">M R DEVELOPER</span> &copy; 2026
+</footer>
+
+<script>
+    function openDownloader(platform) {
+        document.getElementById('mainBox').style.display = 'block';
+        document.getElementById('targetTitle').innerText = platform + " Pro Downloader";
+        document.getElementById('qualityTable').style.display = 'none';
+        document.getElementById('urlInput').value = "";
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function fetchVideo() {
+        const link = document.getElementById('urlInput').value;
+        if(!link) { alert("Please provide a valid link!"); return; }
+
+        document.getElementById('loader').style.display = 'block';
+        document.getElementById('qualityTable').style.display = 'none';
+
+        // Professional Fetching Animation (Simulated)
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('qualityTable').style.display = 'table';
+        }, 2500);
+    }
+</script>
+
+</body>
+</html>
